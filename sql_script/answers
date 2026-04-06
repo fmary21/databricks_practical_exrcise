@@ -1,0 +1,144 @@
+select * from `workspace`.`default`.`23_retail_sales_dataset` limit 100;
+
+--------1. SELECT Statement
+------Q1. Display all columns for all transactions.
+------Expected output: All columns
+ 
+select * From `workspace`.`default`.`23_retail_sales_dataset`
+---------------------------------------------------------------------------------
+----Q2. Display only the Transaction ID, Date, and Customer ID for all records.
+----Expected output: Transaction ID, Date, Customer ID
+
+  select`Transaction ID`,`Date`,`Customer ID` 
+  From `workspace`.`default`.`23_retail_sales_dataset`
+--------------------------------------------------------------------------------
+
+----2. SELECT DISTINCT Statement
+----Q3. Display all the distinct product categories in the dataset.
+
+select distinct`Product Category` From `workspace`.`default`.`23_retail_sales_dataset`
+
+-----------------------------------------------------------------------------------
+
+Q4. Display all the distinct gender values in the dataset.
+Expected output: Gender
+
+select distinct Gender From `workspace`.`default`.`23_retail_sales_dataset`
+---------------------------------------------------------------------------------
+
+----3. WHERE Clause
+----Q5. Display all transactions where the Age is greater than 40.
+----Expected output: All columns
+
+select * From `workspace`.`default`.`23_retail_sales_dataset` where `Age`>40
+
+----------------------------------------------------------------------------------
+
+Q6. Display all transactions where the Price per Unit is between 100 and 500.
+Expected output: All columns
+
+select * From `workspace`.`default`.`23_retail_sales_dataset` where `Price per Unit` between 100 and 500
+------------------------------------------------------------------------------------
+
+Q7. Display all transactions where the Product Category is either 'Beauty' or
+'Electronics'.
+Expected output: All columns
+
+select * From `workspace`.`default`.`23_retail_sales_dataset` where `Product Category` in ('Beauty','Electronics')
+------------------------------------------------------------------------------------
+
+Q8. Display all transactions where the Customer ID is NULL.
+Expected output: All columns
+
+select * From `workspace`.`default`.`23_retail_sales_dataset` where `Customer ID` is NULL
+------------------------------------------------------------------------------------
+
+Q9. Display all transactions where the Quantity is greater than or equal to 3.
+Expected output: All columns
+
+select * From `workspace`.`default`.`23_retail_sales_dataset` where `Quantity`>=3
+------------------------------------------------------------------------------------
+
+---4. Aggregate Functions
+---Q10. Count the total number of transactions.
+---Expected output: Total_Transactions
+
+select count(*) as Total_Transactions From `workspace`.`default`.`23_retail_sales_dataset`
+----------------------------------------------------------------------------------
+
+---Q11. Find the average Age of customers.
+---Expected output: Average_Age
+select avg(`Age`) as Average_Age From `workspace`.`default`.`23_retail_sales_dataset`
+
+------------------------------------------------------------------------------------
+
+---Q12. Find the total quantity of products sold.
+---Expected output: Total_Quantity
+
+select sum(`Quantity`) as Total_Quantity From `workspace`.`default`.`23_retail_sales_dataset`
+------------------------------------------------------------------------------------
+
+Q13. Find the maximum Total Amount spent in a single transaction.
+Expected output: Max_Total_Amount
+
+select max(`Total Amount`) as Max_Total_Amount From `workspace`.`default`.`23_retail_sales_dataset`
+------------------------------------------------------------------------------------
+
+Q14. Find the minimum Price per Unit in the dataset.
+Expected output: Min_Price_per_Unit
+
+select min(`Price per Unit`) as Min_Price_per_Unit From `workspace`.`default`.`23_retail_sales_dataset`
+------------------------------------------------------------------------------------
+
+Q15. Find the minimum Age of customers.
+Expected output: Min_Age
+
+select min(`Age`) as Min_Age From `workspace`.`default`.`23_retail_sales_dataset`
+------------------------------------------------------------------------------------
+
+Q16. Find the maximum Age of customers.
+Expected output: Max_Age
+
+select max(`Age`) as Max_Age From `workspace`.`default`.`23_retail_sales_dataset`
+------------------------------------------------------------------------------------
+
+---5. GROUP BY Statement
+---Q17. Find the number of transactions per Product Category.
+---Expected output: Product
+
+select `Product Category`,count(*) as Transaction_Count From `workspace`.`default`.`23_retail_sales_dataset` group by `Product Category`
+------------------------------------------------------------------------------------
+
+Q18. Find the total revenue (Total Amount) per gender.
+Expected output: Gender
+
+select Gender,sum(`Total Amount`) as Total_Revenue From `workspace`.`default`.`23_retail_sales_dataset` group by Gender
+------------------------------------------------------------------------------------
+
+Q19. Find the average Price per Unit per product category.
+Expected output: Product Category
+
+select `Product Category`,avg(`Price per Unit`) as Average_Price From `workspace`.`default`.`23_retail_sales_dataset` group by `Product Category`
+------------------------------------------------------------------------------------
+
+7. CASE Statement
+Q20. Display a column called Spending_Level that shows 'High' if Total Amount > 1000,
+otherwise 'Low'.
+Expected output: Transaction ID, Total Amount, Spending_Level
+
+select *,case when `Total Amount`>1000 then 'High' else 'Low' end as Spending_Level From `workspace`.`default`.`23_retail_sales_dataset`
+
+------------------------------------------------------------------------------------
+
+Q21. Display a new column called Age_Group that labels customers as:
+• 'Youth' if Age < 30
+• 'Adult' if Age is between 30 and 59
+• 'Senior' if Age >= 60
+Expected output: Customer ID, Age, Age_Group
+
+select *,
+    case when `Age`<30 then 'Youth' 
+         when `Age` between 30 and 59 then 'Adult' else 'Senior'
+         end as Age_Group 
+From `workspace`.`default`.`23_retail_sales_dataset`
+-----------------------------------------------------------------------------------
